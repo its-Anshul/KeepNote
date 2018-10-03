@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="note.war">
+    <output-path>$PROJECT_DIR$/classes/artifacts/note_war</output-path>
+    <root id="root">
+      <element id="directory" name="node.war" />
+    </root>
+  </artifact>
+</component>

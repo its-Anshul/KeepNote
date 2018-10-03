@@ -51,9 +51,9 @@ public class NoteDAOImpl implements NoteDAO {
 	 * Remove the note from the database(note) table.
 	 */
 
-	public boolean deleteNote(int noteId) {
+	public boolean deleteNote(int Id) {
 	    Session session = sessionFactory.getCurrentSession();
-	    session.delete(getNoteById(noteId));
+	    session.delete(getNoteById(Id));
 	    session.flush();
         return true;
 	}
@@ -75,8 +75,8 @@ public class NoteDAOImpl implements NoteDAO {
 	/*
 	 * retrieve specific note from the database(note) table
 	 */
-	public Note getNoteById(int noteId) {
-	    String hql = "FROM Note WHERE Id = " + noteId;
+	public Note getNoteById(int Id) {
+	    String hql = "FROM Note WHERE Id = " + Id;
 	    Session session = sessionFactory.getCurrentSession();
 	    Query query = session.createQuery(hql);
 	    List<Note> answer = query.list();

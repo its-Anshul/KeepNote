@@ -30,6 +30,7 @@ public class NoteController {
 	 * 
 	 */
 
+
 	/*
 	 * Autowiring should be implemented for the NoteDAO.
 	 * Create a Note object.
@@ -49,8 +50,10 @@ public class NoteController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getAllNotes(ModelMap model){
-		model.addAllAttributes(noteDAO.getAllNotes());
-		return "index";
+	    //for(int i=0;i<noteDAO.getAllNotes().size();i++) {
+            model.addAttribute("notetitle" , noteDAO.getAllNotes());
+        //}
+        return "index";
 	}
 
 	/*
@@ -64,8 +67,7 @@ public class NoteController {
 	 * "/add".
 	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addValues(@RequestParam("noteTitle") String noteTitle, @RequestParam("noteContent") String noteContent,
-							@RequestParam("noteStatus") String noteStatus){
+	public String addValues(@RequestParam String noteTitle, @RequestParam String noteContent, @RequestParam String noteStatus){
 
 		Note note = new Note();
 
@@ -73,6 +75,8 @@ public class NoteController {
 		note.setNoteStatus(noteStatus);
 		note.setNoteTitle(noteTitle);
 		note.setCreatedAt(LocalDateTime.now());
+        //a.addAttribute("notetitle" , note);
+		//System.out.println(noteContent);
 		if(noteDAO.saveNote(note) == true){
 			return "redirect:/";
 		}else {
@@ -85,7 +89,7 @@ public class NoteController {
 	 * and remove an existing note by calling the deleteNote() method of the
 	 * NoteRepository class.This handler method should map to the URL "/delete".
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String delete(@RequestParam("noteId")int noteId){
 		if(noteDAO.deleteNote(noteId)){
 			return "redirect:/";
